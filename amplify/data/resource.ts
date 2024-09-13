@@ -44,7 +44,7 @@ const client = generateClient<Schema>() // use this Data client for CRUDL reques
 /*== STEP 3 ===============================================================
 Fetch records from the database and use them in your frontend component.
 (THIS SNIPPET WILL ONLY WORK IN THE FRONTEND CODE FILE.)
-=========================================================================*/
+=========================================================================*/ 
 
 /* For example, in a React component, you can use this snippet in your
   function's RETURN statement */
