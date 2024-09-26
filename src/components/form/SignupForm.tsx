@@ -12,14 +12,14 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useNavigate } from 'react-router-dom';
-import { useToast } from '../ui/use-toast';
 import { signUp } from 'aws-amplify/auth';
 import SocialLogins from './SocialLogins';
 import { useState } from 'react';
+import { useErrorHandler } from '@/utils/hooks/useErrorHandler';
 
 const SignupForm = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
+  const handleError = useErrorHandler();
   const form = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
     defaultValues: {
@@ -42,12 +42,7 @@ const SignupForm = () => {
       });
       navigate('/verify', { state: { email } });
     } catch (error) {
-      if (error instanceof Error) {
-        toast({
-          description: error.message,
-          variant: 'destructive',
-        });
-      }
+      handleError(error);
     }
   };
 
@@ -97,11 +92,19 @@ const SignupForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={isSubmitting || isSocialLoginInProgress} className="w-full">
+        <Button
+          type="submit"
+          disabled={isSubmitting || isSocialLoginInProgress}
+          className="w-full"
+        >
           Sign Up
         </Button>
 
-        <SocialLogins isSubmitting={isSubmitting} isSocialLoginInProgress={isSocialLoginInProgress} setIsSocialLoginInProgress={setIsSocialLoginInProgress} />
+        <SocialLogins
+          isSubmitting={isSubmitting}
+          isSocialLoginInProgress={isSocialLoginInProgress}
+          setIsSocialLoginInProgress={setIsSocialLoginInProgress}
+        />
       </form>
     </Form>
   );

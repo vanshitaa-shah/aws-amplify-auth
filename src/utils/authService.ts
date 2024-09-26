@@ -1,11 +1,4 @@
-import { CognitoIdentityProviderClient } from '@aws-sdk/client-cognito-identity-provider';
 import { signInWithRedirect } from 'aws-amplify/auth';
-import { awsConfig } from './awsConfig';
-
-// Initialize the Cognito client
-export const cognitoClient = new CognitoIdentityProviderClient({
-  region: awsConfig.region,
-});
 
 // Helper function to set authentication state
 const setAuthState = (provider: string) => {

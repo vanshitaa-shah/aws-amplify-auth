@@ -22,7 +22,7 @@ const HomePage = () => {
       }
     };
     fetchUserData();
-  }, [handleError]);
+  }, []);
 
   // Handle user logout
   const handleLogout = async () => {
